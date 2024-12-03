@@ -9,9 +9,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class Day1 {
     public static void main(String[] args) {
+        //part1
         String data = "day1data.txt";
 
         List<Integer> left = new ArrayList<>();
@@ -41,6 +43,24 @@ public class Day1 {
         }
  
         System.out.println(totalDiff);
+
+        int totalSum = 0;
+
+        //part2
+        HashMap<Integer,Integer> map = new HashMap<>();
+
+        for (int i = 0; i < rightArr.length; i++) {
+            map.put(rightArr[i], map.getOrDefault(rightArr[i],0)+1);
+        }
+
+        for (int i = 0; i < leftArr.length; i++) {
+            if (map.containsKey(leftArr[i])) {
+                    int count = map.getOrDefault(leftArr[i],0);
+                    totalSum += leftArr[i] * count;
+                }
+        }
+
+        System.out.println(totalSum);
 
         } catch (IOException e) {
             System.err.println(e.getMessage());
