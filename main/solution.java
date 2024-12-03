@@ -11,11 +11,11 @@ public class solution {
         // day1.day1solution(content);
 
         day2 day2 = new day2();
-        int[] nums = {7,6,4,2,1};
+        String content = "main/day2/day2data.txt";
 
-        boolean result = day2.day2solution(nums);
+        int countResult = day2.countReport(content);
 
-        System.out.println(result);
+        System.out.println(countResult);
         
     }
     
