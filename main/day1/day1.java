@@ -3,6 +3,8 @@
 //to read the file: BufferedReader and FileReader (must use try{}); try-with-resources 
 //important: convert from List<Integer> to int[]
 
+package main.day1;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -11,15 +13,14 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class Day1 {
-    public static void main(String[] args) {
+public class day1 {
+    public void day1solution(String content) {
         //part1
-        String data = "day1data.txt";
 
         List<Integer> left = new ArrayList<>();
         List<Integer> right = new ArrayList<>();
 
-        try (BufferedReader readData = new BufferedReader(new FileReader(data))){
+        try (BufferedReader readData = new BufferedReader(new FileReader(content))){
         String line;
 
         while ((line = readData.readLine()) != null) {
