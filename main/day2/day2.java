@@ -1,6 +1,13 @@
-//goal: boolean + count;
-//condition: decrease or increase, at the most 3, return true;
-//solution: for loop
+/**
+ * part1: 
+ * goal: boolean + count;
+ * condition: decrease or increase, at the most 3, return true;
+ * solution: for loop
+ * 
+ * part2:
+ * goal: remove 1, double check;
+ * solution: stack + for loop
+ */
 
 package main.day2;
 
