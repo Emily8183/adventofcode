@@ -8,13 +8,14 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Stack;
 
 public class day2 {
 
     public int countReport(String content) {
-        //part 1
-
-        int count = 0;
+       
+        // int countPart1 = 0;
+        int countPart2 = 0;
 
         try (BufferedReader readData = new BufferedReader(new FileReader(content))) {
         String line;
@@ -35,18 +36,59 @@ public class day2 {
 
             System.out.println(Arrays.toString(nums)); //print to confirm the array data
        
-            if (comparison(nums)) count++;
+            // if (comparison(nums)) countPart1++;
+            if (remove(nums)) countPart2++;
 
         }
         } catch (IOException e) {
             System.err.println(e.getMessage());
         } 
 
-        return count;
+        return countPart2;
 
     }
 
-    private boolean comparison(int[] nums) { //to compare the two adjacent nums
+    //Part 2: check again by removing maximum 1 element
+    private boolean remove(int[] nums) {
+        Stack<Integer> stack = new Stack<>();
+
+        stack.add(nums[0]);
+
+        int times = 0;
+
+        for (int i = 1; i < nums.length; i++) {
+            boolean increasing = false;
+    
+            int difference = Math.abs(nums[i] - nums[i-1]);
+
+            if (nums[1] > nums[0]) {
+                increasing = true;
+            }
+            
+            stack.add(nums[i]);
+
+            if (nums[i] <= nums[i-1] && increasing && !stack.isEmpty()) {
+                stack.pop();
+                times++;
+            }
+            
+            if (nums[i] >= nums[i-1] && !increasing && !stack.isEmpty()) {
+                stack.pop();
+                times++;
+            }
+
+            if (difference > 3 && !stack.isEmpty()) {
+                stack.pop();
+                times++;
+            }
+        }
+
+        return times <= 1;
+
+    }
+
+    //part1: to compare the two adjacent nums
+    private boolean comparison(int[] nums) {
         int i = 1;
 
         while (i < nums.length) {
