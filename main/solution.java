@@ -11,7 +11,9 @@ public class solution {
         // day1.day1solution(content);
 
         day2 day2 = new day2();
-        String content = "main/day2/day2data.txt";
+        // String content = "main/day2/day2data.txt";
+        
+        String content = "main/day2/day2extratest.txt";
 
         int countResult = day2.countReport(content);
 

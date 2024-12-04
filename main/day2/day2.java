@@ -15,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.Stack;
 
 public class day2 {
@@ -57,44 +58,71 @@ public class day2 {
 
     //Part 2: check again by removing maximum 1 element
     private boolean remove(int[] nums) {
-        Stack<Integer> stack = new Stack<>();
 
-        stack.add(nums[0]);
+        LinkedList<Integer> list = new LinkedList<>();
 
-        int times = 0;
+        for (int num : nums) {
+            list.add(num);
+        }
+        
+        for (int i = 0; i < list.size(); i++) {
+            int removeItem = list.remove(i);
 
-        for (int i = 1; i < nums.length; i++) {
-            boolean increasing = false;
-    
-            int difference = Math.abs(nums[i] - nums[i-1]);
+            if (validList(list)) {
+                return true;
+            } 
 
-            if (nums[1] > nums[0]) {
-                increasing = true;
-            }
-            
-            stack.add(nums[i]);
-
-            if (nums[i] <= nums[i-1] && increasing && !stack.isEmpty()) {
-                stack.pop();
-                times++;
-            }
-            
-            if (nums[i] >= nums[i-1] && !increasing && !stack.isEmpty()) {
-                stack.pop();
-                times++;
-            }
-
-            if (difference > 3 && !stack.isEmpty()) {
-                stack.pop();
-                times++;
-            }
+            list.add(i,removeItem);
+     
         }
 
-        return times <= 1;
+        return false;
 
     }
 
-    //part1: to compare the two adjacent nums
+    //part2: to compare the two adjacent nums in linkedlist
+    private boolean validList(LinkedList<Integer> list) {
+        int i = 1;
+
+        while (i < list.size()) {
+            int difference = Math.abs(list.get(i) - list.get(i-1));
+
+            if ((isIncreasing(list) || isDecreasing(list)) && difference >= 1 && difference <= 3) {
+                i++;
+            } else {
+                return false;
+            } 
+        }
+        return true;
+    }
+
+    private boolean isIncreasing(LinkedList<Integer> list) {
+
+        int i = 1;
+
+        while (i < list.size()) {
+            if (list.get(i) > list.get(i-1)) {
+                i++;
+            } else return false;
+        }
+
+        return true;
+    }
+
+    private boolean isDecreasing(LinkedList<Integer> list) {
+
+        int i = 1;
+
+        while (i < list.size()){
+            if (list.get(i) < list.get(i-1)) {
+                i++;
+            } else return false;
+        }
+
+        return true;
+    }
+
+    //part1: to compare the two adjacent nums in an array
     private boolean comparison(int[] nums) {
         int i = 1;
 
