@@ -1,68 +1,72 @@
 package main.day4;
 
-//This is the function to calculate all the possibilities, so the word "XMAS" could turn. The codes run fine but the solution does NOT meet the problem's requirements
-
 public class day4 {
-
-    boolean visited[][];
     int count = 0;
 
     public int countFindings(int i, int j, int index, String word, char[][] board) {
         int rows = board.length;
         int columns = board[0].length;
-        
-        visited = new boolean[rows][columns];
 
         for (i = 0; i < rows; i++) {
             for (j = 0; j < columns; j++) {
             
-                if (findXmas(i, j, 0, word, board)) {
-                    
-                    count++;
+                if (board[i][j] == word.charAt(0)) {
+                    // if (
+                    //     findXmas(i, j+1, 1, word, board, "RIGHT") ||
+                    //     findXmas(i, j-1, 1, word, board, "LEFT") ||
+                    //     findXmas(i-1, j, 1, word, board, "UP") ||
+                    //     findXmas(i+1, j, 1, word, board, "DOWN") ||
+                    //     findXmas(i-1, j-1, 1, word, board, "UPLEFT") ||
+                    //     findXmas(i+1, j-1, 1, word, board, "DOWNLEFT") ||
+                    //     findXmas(i-1, j+1, 1, word, board, "UPRIGHT") ||
+                    //     findXmas(i+1, j+1, 1, word, board, "DOWNRIGHT")) {
+                        count += findXmas(i, j + 1, 1, word, board, "RIGHT") ? 1 : 0;
+                        count += findXmas(i, j - 1, 1, word, board, "LEFT") ? 1 : 0;
+                        count += findXmas(i - 1, j, 1, word, board, "UP") ? 1 : 0;
+                        count += findXmas(i + 1, j, 1, word, board, "DOWN") ? 1 : 0;
+                        count += findXmas(i - 1, j - 1, 1, word, board, "UPLEFT") ? 1 : 0;
+                        count += findXmas(i + 1, j - 1, 1, word, board, "DOWNLEFT") ? 1 : 0;
+                        count += findXmas(i - 1, j + 1, 1, word, board, "UPRIGHT") ? 1 : 0;
+                        count += findXmas(i + 1, j + 1, 1, word, board, "DOWNRIGHT") ? 1 : 0;
+    
                 }
-                clearVisited();
+
             }
         }
+        
 
         return count;
     }
 
-    public boolean findXmas(int i, int j, int index, String word, char[][] board) {
+    public boolean findXmas(int i, int j, int index, String word, char[][] board, String direction) {
         if (index == word.length()) {
             return true;
         }
 
-        if (i < 0 || i >= board.length || j < 0 || j >= board[i].length || word.charAt(index) != board[i][j] || visited[i][j]) return false;
+        if (i < 0 || i >= board.length || j < 0 || j >= board[i].length || word.charAt(index) != board[i][j]) return false;
 
-        visited[i][j] = true;
+        switch (direction) {
+            case "RIGHT": return findXmas(i, j+1, index+1, word, board, "RIGHT");
 
-        if (findXmas(i+1, j, index+1, word, board) || //往下
-            findXmas(i-1, j, index+1, word, board) || //往上
+            case "LEFT": return findXmas(i, j-1, index+1, word, board, "LEFT");
 
-            findXmas(i-1, j+1, index+1, word, board) || //往右上
-            findXmas(i+1, j+1, index+1, word, board) || //往右下
+            case "UP": return findXmas(i-1, j, index+1, word, board, "UP");
+
+            case "DOWN": return findXmas(i+1, j, index+1, word, board, "DOWN");
+
+            case "UPLEFT": return findXmas(i-1, j-1, index+1, word, board, "UPLEFT");
             
-            findXmas(i-1, j-1, index+1, word, board) || //往左上            
-            findXmas(i+1, j-1, index+1, word, board) || //往左下
+            case "DOWNLEFT": return findXmas(i+1, j-1, index+1, word, board, "DOWNLEFT");
 
-            findXmas(i, j-1, index+1, word, board) || //往左
-            findXmas(i, j+1, index+1, word, board)) { //往右
-                
-            return true;
+            case "UPRIGHT": return findXmas(i-1, j+1, index+1, word, board, "UPRIGHT");
+
+            case "DOWNRIGHT": return findXmas(i+1, j+1, index+1, word, board, "DOWNRIGHT");
+
+            default: return false;
+
         }
 
-        visited[i][j] = false;
-
-        return false;
-
-    }
-
-    private void clearVisited() {
-        for (int i = 0; i < visited.length; i++) {
-            for (int j = 0; j < visited[0].length; j++) {
-                visited[i][j] = false;
-            }
-        }
     }
     
 }
+
