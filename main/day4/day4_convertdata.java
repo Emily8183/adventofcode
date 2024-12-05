@@ -1,11 +1,19 @@
-//switch-case
-
 package main.day4;
 
-public class day4 {
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class day4_convertdata {
+
     int count = 0;
 
-    public int countFindings(int i, int j, int index, String word, char[][] board) {
+    public int countFindings(int i, int j, int index, String word, String content) throws IOException {
+
+        char[][] board = convertFiletoBoard(content);
+
         int rows = board.length;
         int columns = board[0].length;
 
@@ -29,6 +37,29 @@ public class day4 {
         }
 
         return count;
+    }
+
+    private char[][] convertFiletoBoard(String filePath) throws IOException {
+        //create rows (ArrayList<>())
+        List<char[]> rows = new ArrayList<>();
+
+        //read the file, add the rows
+        try (BufferedReader readData = new BufferedReader(new FileReader(filePath))) {
+            String line;
+
+            while((line = readData.readLine()) != null) {
+                rows.add(line.toCharArray());
+            }
+        }
+
+        //make the board 
+        char[][] board = new char[rows.size()][];
+        
+        for (int i = 0; i < rows.size(); i++) {
+            board[i] = rows.get(i);
+        }
+
+        return board;
     }
 
     public boolean findXmas(int i, int j, int index, String word, char[][] board, String direction) {
@@ -62,4 +93,3 @@ public class day4 {
     }
     
 }
-
