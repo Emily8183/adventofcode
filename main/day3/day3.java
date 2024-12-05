@@ -2,6 +2,9 @@
  * part1:
  * goal: find the exact format of mul(num,num);
  * solution: Regex, matcher.group
+ * important: 
+ * \\(: Matches the literal opening parenthesis (. The backslash (\) is escaped as \\ in Java strings.
+ * \\d+: Matches one or more digits (\d is shorthand for digits, and + means one or more).
  */
 
 
@@ -23,18 +26,23 @@ public class day3 {
 
         String line;
 
-        String reqPattern = "mul\\((\\d+),(\\d+)\\)";
-
         StringBuilder fullText = new StringBuilder();
         
-        Pattern pattern = Pattern.compile(reqPattern);
-
+        //to convert the txt.file to string
         while ((line = readData.readLine()) != null) {
 
+            //to fix the texts spanning different lines
             fullText.append(line).append(" "); 
         }
 
-        Matcher matcher = pattern.matcher(fullText.toString());
+        //part 2: Remove the "don't()...do()" segments
+        String refinedText = fullText.toString().replaceAll("don't\\(.*?\\).*?do\\(.*?\\)", "");
+        System.out.println(refinedText);
+
+        String reqPattern = "mul\\((\\d+),(\\d+)\\)";
+        Pattern pattern = Pattern.compile(reqPattern);
+
+        Matcher matcher = pattern.matcher(refinedText);
 
         while (matcher.find()) { //matches() checks if the entire string matches the patter
             String firstNum = matcher.group(1);
