@@ -16,9 +16,22 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class day3 {
-    public int part1() {
 
-        String input = transferData();
+    public int part2(String input) {
+
+        input = transferData(input);
+     
+        input = input.replaceAll("don't\\(\\).*?do\\(\\)", ""); //to get rid of the session don't() - do()
+        input = input.replaceAll("don't\\(\\).*$", ""); //to get rid of the ending part from don't() and no do(). .*：匹配任意字符, $：匹配字符串的结尾
+     
+        int num = part1(input);
+
+        return num;
+     }
+
+    public int part1(String input) {
+
+        input = transferData(input);
 
         int multiply = 0;
 
@@ -40,10 +53,7 @@ public class day3 {
         return multiply;
 
     } 
-
-
-    private String transferData() {
-        String content = "main/day3/day3data.txt";
+    private String transferData(String content) {
 
         StringBuilder fullText = new StringBuilder();
 

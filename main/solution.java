@@ -21,8 +21,12 @@ public class solution {
         // System.out.println(countResult);
 
         day3 day3 = new day3();
-        int result = day3.part1();
-        System.out.println(result); //part 2 isn't correct yet!!!!!
+        String content = "main/day3/part2.txt";
+        
+        // int result1 = day3.part1(content);
+        
+        int result2 = day3.part2(content);
+        System.out.println(result2); //part 2 isn't correct yet!!!!!
 
         // day4_part1 day4_part1 = new day4_part1();
         // day4_part2 day4_part2 = new day4_part2();
