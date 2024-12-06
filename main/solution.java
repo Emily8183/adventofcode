@@ -4,7 +4,9 @@ import java.io.IOException;
 import main.day1.day1;
 import main.day2.day2;
 import main.day3.day3;
-import main.day4.day4_convertdata;
+import main.day4.day4_part1;
+import main.day4.day4_part2;
+
 
 public class solution {
     public static void main(String[] args) throws IOException {
@@ -24,11 +26,14 @@ public class solution {
         // int result = day3.calMultiply(data);
         // System.out.println(result); //part 2 isn't correct yet!!!!!
 
-        day4_convertdata day4_convertdata = new day4_convertdata();
-        // String word = "XMAS";
+        day4_part1 day4_part1 = new day4_part1();
+        day4_part2 day4_part2 = new day4_part2();
         String board = "main/day4/day4data.txt";
-        int countResult = day4_convertdata.countFindings(0, 0, 0, "XMAS", board);
-        System.out.println(countResult);
+        // int part1Result = day4_part1.countFindings(0, 0, 0, "XMAS", board);
+        int part2Result = day4_part2.countMas(0,0,0,"MAS",board);
+        System.out.println(part2Result);
+
+
 
         
     }

@@ -1,3 +1,5 @@
+//Part I
+
 package main.day4;
 
 import java.io.BufferedReader;
@@ -6,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class day4_convertdata {
+public class day4_part1 {
 
     int count = 0;
 
