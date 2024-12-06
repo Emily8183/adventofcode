@@ -7,8 +7,6 @@
  * \\d+: Matches one or more digits (\d is shorthand for digits, and + means one or more).
  */
 
-
-
 package main.day3;
 
 import java.io.BufferedReader;
@@ -18,31 +16,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class day3 {
-    public int calMultiply(String content) {
+    public int part1() {
+
+        String input = transferData();
 
         int multiply = 0;
 
-        try (BufferedReader readData = new BufferedReader(new FileReader(content))) {
+        String reqPattern = "mul\\((\\d+),(\\d+)\\)"; 
 
-        String line;
-
-        StringBuilder fullText = new StringBuilder();
-        
-        //to convert the txt.file to string
-        while ((line = readData.readLine()) != null) {
-
-            //to fix the texts spanning different lines
-            fullText.append(line).append(" "); 
-        }
-
-        //part 2: Remove the "don't()...do()" segments
-        String refinedText = fullText.toString().replaceAll("don't\\(.*?\\).*?do\\(.*?\\)", "");
-        System.out.println(refinedText);
-
-        String reqPattern = "mul\\((\\d+),(\\d+)\\)";
         Pattern pattern = Pattern.compile(reqPattern);
 
-        Matcher matcher = pattern.matcher(refinedText);
+        Matcher matcher = pattern.matcher(input);
 
         while (matcher.find()) { //matches() checks if the entire string matches the patter
             String firstNum = matcher.group(1);
@@ -52,14 +36,37 @@ public class day3 {
 
             multiply += (Integer.parseInt(firstNum) * Integer.parseInt(secondNum));
         }
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-        }
 
         return multiply;
 
-    }
+    } 
 
+
+    private String transferData() {
+        String content = "main/day3/day3data.txt";
+
+        StringBuilder fullText = new StringBuilder();
+
+        try (BufferedReader readData = new BufferedReader(new FileReader(content))) {
+
+            String line;
+            
+            //to convert the txt.file to string
+            while ((line = readData.readLine()) != null) {
+    
+                //to fix the texts spanning different lines
+                fullText.append(line).append(" "); 
+            }
+
+        } catch (IOException e) {
+            System.err.println();
+        }
+
+        
+        return fullText.toString();
+
+
+    }
 
 }
     

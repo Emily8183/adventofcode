@@ -20,18 +20,16 @@ public class solution {
         // int countResult = day2.countReport(content);
         // System.out.println(countResult);
 
-        // day3 day3 = new day3();
-        // String data = "main/day3/day3data.txt";
-        // // String data = "main/day3/day3extratest.txt";
-        // int result = day3.calMultiply(data);
-        // System.out.println(result); //part 2 isn't correct yet!!!!!
+        day3 day3 = new day3();
+        int result = day3.part1();
+        System.out.println(result); //part 2 isn't correct yet!!!!!
 
-        day4_part1 day4_part1 = new day4_part1();
-        day4_part2 day4_part2 = new day4_part2();
-        String board = "main/day4/day4data.txt";
-        // int part1Result = day4_part1.countFindings(0, 0, 0, "XMAS", board);
-        int part2Result = day4_part2.countMas(0,0,0,"MAS",board);
-        System.out.println(part2Result);
+        // day4_part1 day4_part1 = new day4_part1();
+        // day4_part2 day4_part2 = new day4_part2();
+        // String board = "main/day4/day4data.txt";
+        // // int part1Result = day4_part1.countFindings(0, 0, 0, "XMAS", board);
+        // int part2Result = day4_part2.countMas(0,0,0,"MAS",board);
+        // System.out.println(part2Result);
 
 
 
