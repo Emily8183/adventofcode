@@ -48,6 +48,7 @@ public class solution {
 
         String file = "main/day5/day5pairs.txt";
         day5.day5(file, set, graph, inDegreeMap);
+        day5.topoSorting(file, graph, inDegreeMap);
 
         
 

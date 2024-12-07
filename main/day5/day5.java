@@ -19,18 +19,35 @@ public class day5 {
     //step 2: topological sorting (to make the numbers in order)
     public static void topoSorting (String filePath, HashMap<Integer,List<Integer>> graph, HashMap<Integer, Integer> inDegreeMap) {
 
-    //queue, add the first file with 0 indegree
-    Queue<Integer> queue = new LinkedList<>();
+        //queue, add the first file with 0 indegree
+        Queue<Integer> queue = new LinkedList<>();
+        for (int i = 0; i < 49; i++) {
+            if (inDegreeMap.get(i) == 0) { //如果入度为0
+                queue.add(i); //就把这个节点加到queue
+            }
+        }
 
+        List<Integer> result = new ArrayList<>();
 
+        //Topological sorting
+        while (!queue.isEmpty()) {
+            int cur = queue.poll();
+            result.add(cur);
 
+            for (int file : graph.get(cur)) {
+                inDegreeMap.put(file, inDegreeMap.get(file)-1); //不可以直接把inDegreeMap.get(file)--,不知道为什么
+                if (inDegreeMap.get(file) == 0) {
+                    queue.add(file);
+                }
+            }
+        }
 
-    //Topological sorting
+        System.out.println(result);
 
-    
-
-    //get the sorted array as the result
-
+        //get the sorted array as the result
+        // for (int i = 0; i < result.size(); i++) {
+        //     System.out.println(result.get(i));
+        // }
     }
 
 
@@ -74,14 +91,16 @@ public class day5 {
         }
 
         //print out graph
+        System.out.println("printing out the graph");
         for (Map.Entry<Integer,List<Integer>> entry : graph.entrySet()) {
             System.out.println(entry.getKey() + ":" + entry.getValue());
         }
 
         //print out inDegreeMap
-        // for (Map.Entry<Integer,Integer> entry : inDegreeMap.entrySet()){
-        //     System.out.println(entry.getKey() + ":" + entry.getValue());
-        // }
+        System.out.println("printing out the inDegreeMap");
+        for (Map.Entry<Integer,Integer> entry : inDegreeMap.entrySet()){
+            System.out.println(entry.getKey() + ":" + entry.getValue());
+        }
     }
     
 }
