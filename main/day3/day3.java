@@ -5,6 +5,9 @@
  * important: 
  * \\(: Matches the literal opening parenthesis (. The backslash (\) is escaped as \\ in Java strings.
  * \\d+: Matches one or more digits (\d is shorthand for digits, and + means one or more).
+ * 
+ * Part 2:
+Goal: 1) skip the part between don't() and do(); 2) skip the part from don't() to the end -if there isn't a paired do();
  */
 
 package main.day3;

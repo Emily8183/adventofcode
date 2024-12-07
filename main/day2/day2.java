@@ -5,7 +5,7 @@
  * solution: for loop
  * 
  * part2:
- * goal: remove 1, double check;
+ * goal: remove one element, check again;
  * solution: stack + for loop
  */
 
