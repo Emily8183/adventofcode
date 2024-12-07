@@ -8,22 +8,21 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
 public class day5 {
 
-    //build the graph and indegree 建模和记录入度
-
-
-    // HashMap<Integer, Integer> inDegreeMap = new HashMap<>();
-
-
-
-
-
+    //step 2: topological sorting (to make the numbers in order)
+    public static void topoSorting (String filePath, HashMap<Integer,List<Integer>> graph, HashMap<Integer, Integer> inDegreeMap) {
 
     //queue, add the first file with 0 indegree
+    Queue<Integer> queue = new LinkedList<>();
+
+
 
 
     //Topological sorting
@@ -31,6 +30,8 @@ public class day5 {
     
 
     //get the sorted array as the result
+
+    }
 
 
     //hashmap: key is number, value is index
@@ -44,7 +45,8 @@ public class day5 {
 
     //find the middle number, return sum
 
-    public static void day5(String filePath, HashMap<Integer,List<Integer>> graph, HashMap<Integer, Integer> inDegreeMap) throws IOException {
+    //step 1: convert the file into graph and indegree 建模和记录入度
+    public static void day5(String filePath, HashSet<Integer> set, HashMap<Integer,List<Integer>> graph, HashMap<Integer, Integer> inDegreeMap) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
 
@@ -53,6 +55,12 @@ public class day5 {
                 
                 int s = Integer.parseInt(pairs[0].trim());
                 int t = Integer.parseInt(pairs[1].trim());
+
+                set.add(s);
+                set.add(t);
+
+                System.out.println("the set size is" + set.size()); //49个文件
+                
 
                 //when the num is not continuous, hashmap is better than ArrayList<>(); 
                 graph.putIfAbsent(s, new ArrayList<>()); //if didn't find s, add s and an empty list
@@ -74,8 +82,6 @@ public class day5 {
         // for (Map.Entry<Integer,Integer> entry : inDegreeMap.entrySet()){
         //     System.out.println(entry.getKey() + ":" + entry.getValue());
         // }
-
-        
     }
     
 }

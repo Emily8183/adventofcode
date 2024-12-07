@@ -2,6 +2,7 @@ package main;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import main.day1.day1;
@@ -43,9 +44,10 @@ public class solution {
         
         HashMap<Integer, List<Integer>> graph = new HashMap<>();
         HashMap<Integer, Integer> inDegreeMap = new HashMap<>();
+        HashSet<Integer> set = new HashSet<>();
 
         String file = "main/day5/day5pairs.txt";
-        day5.day5(file, graph, inDegreeMap);
+        day5.day5(file, set, graph, inDegreeMap);
 
         
 
