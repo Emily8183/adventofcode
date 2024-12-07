@@ -46,12 +46,12 @@ public class solution {
         HashMap<Integer, Integer> inDegreeMap = new HashMap<>();
         HashSet<Integer> set = new HashSet<>();
 
-        String file = "main/day5/day5extratest.txt";
-        int[] test = {75,97,47,61,53};
-        boolean result = day5.isValidArray(test,graph,0);
-        System.out.println(result);
-        day5.day5(file, set, graph, inDegreeMap);
-        day5.topoSorting(file, graph, inDegreeMap);
+        String givenPairs = "main/day5/day5pairs.txt";
+        String givenArrays = "main/day5/day5arrays.txt";
+        day5.day5(givenPairs, set, graph, inDegreeMap);
+        int sum = day5.collectArrays(givenArrays, graph);
+        System.out.println(sum);
+    
 
         
 
