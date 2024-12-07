@@ -66,6 +66,7 @@ public class day5 {
     public static void day5(String filePath, HashSet<Integer> set, HashMap<Integer,List<Integer>> graph, HashMap<Integer, Integer> inDegreeMap) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
+            Integer count = 0;
 
             while ((line = reader.readLine()) != null) {
                 String[] pairs = line.split("\\|");
@@ -75,18 +76,26 @@ public class day5 {
 
                 set.add(s);
                 set.add(t);
+                 
+                count++;
 
-                System.out.println("the set size is" + set.size()); //49个文件
-                
-
-                //when the num is not continuous, hashmap is better than ArrayList<>(); 
+                // when the num is not continuous, hashmap is better than ArrayList<>(); 
                 graph.putIfAbsent(s, new ArrayList<>()); //if didn't find s, add s and an empty list
-                graph.get(s).add(t); //if found s, grab the value (which is the s' arraylist, add the t. so we will get how many t the s points to.
-                
-                inDegreeMap.putIfAbsent(s,0);
-                inDegreeMap.put(t, inDegreeMap.getOrDefault(t,0) + 1);
-            
+                graph.putIfAbsent(t, new ArrayList<>()); 
+                graph.get(s).add(t);
+
+                inDegreeMap.put(t, inDegreeMap.getOrDefault(t, 0) + 1);
+                inDegreeMap.putIfAbsent(s, 0); 
+
             }
+
+            System.out.println("the set size is " + set.size());//49个文件（n)
+            System.out.println("There are " + count + " lines"); //1176个入度(m)
+
+            
+            
+
+           
         
         }
 
@@ -96,11 +105,28 @@ public class day5 {
             System.out.println(entry.getKey() + ":" + entry.getValue());
         }
 
-        //print out inDegreeMap
-        System.out.println("printing out the inDegreeMap");
-        for (Map.Entry<Integer,Integer> entry : inDegreeMap.entrySet()){
-            System.out.println(entry.getKey() + ":" + entry.getValue());
-        }
+        // //print out inDegreeMap
+        // System.out.println("printing out the inDegreeMap");
+        // for (Map.Entry<Integer,Integer> entry : inDegreeMap.entrySet()){
+        //     System.out.println(entry.getKey() + ":" + entry.getValue());
+        // }
+    }
+
+    public boolean isValidArray(int[] arr, HashMap<Integer,List<Integer>> graph, int index) {
+        if (index >= arr.length -1) return true;
+
+        int current = arr[index];
+
+        if (graph.containsKey(current)) {
+            List<Integer> validNextNums = graph.get(current);
+            for (int i = index+1; i < arr.length; i++) {
+                if (!validNextNums.contains(arr[i])) return false;
+            }
+
+        } else return false;
+
+        return isValidArray(arr, graph, index+1);
+
     }
     
 }
